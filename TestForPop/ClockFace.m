@@ -46,13 +46,64 @@
         self.secondHand.fillColor = [UIColor redColor].CGColor;
         self.secondHand.position = CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2);
         [self addSublayer:self.secondHand];
+        
+        [self setupWidgets];
     }
     return self;
 }
 
 - (void)setupWidgets
 {
+    CGFloat positionX = 0;
+    CGFloat positionY = 0;
+    CGFloat layerWidth = 4;
+    CGFloat layerHeight = 12;
+    CGFloat tmpWidth = layerWidth;
+    CGFloat tmpHeight = layerHeight;
     
+    for (NSInteger i = 0; i < 4; i++) {
+        if ((i + 1) % 2 == 0) {
+            layerWidth = layerHeight;
+            layerHeight = tmpWidth;
+        } else {
+            layerWidth = tmpWidth;
+            layerHeight = tmpHeight;
+        }
+
+        switch (i) {
+            case 0:
+            {
+                positionX = (self.frame.size.width - layerWidth) / 2;
+                positionY = 0;
+            }
+                break;
+            case 1:
+            {
+                positionX = self.frame.size.width - layerWidth;
+                positionY = (self.frame.size.height - layerWidth) / 2;
+            }
+                break;
+            case 2:
+            {
+                positionX = (self.frame.size.width - layerWidth) / 2;
+                positionY = self.frame.size.height - layerHeight;
+            }
+                break;
+            case 3:
+            {
+                positionX = 0;
+                positionY = (self.frame.size.height - layerWidth) / 2;
+            }
+                break;
+            default:
+                break;
+        }
+        
+        CAShapeLayer *layer = [CAShapeLayer layer];
+        layer.fillColor = [UIColor blackColor].CGColor;
+        layer.path = [UIBezierPath bezierPathWithRect:CGRectMake(positionX, positionY, layerWidth, layerHeight)].CGPath;
+        [self addSublayer:layer];
+    }
 }
 
 - (void)setTime:(NSDate *)time
