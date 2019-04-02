@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,60 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="jYa-Ug-eJw">
+                                <rect key="frame" x="0.0" y="596" width="414" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="575864074.40138102">
+                                    <!--2019-04-02 02:14:34 +0000-->
+                                </date>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Sh-kM-Mra">
+                                <rect key="frame" x="166" y="506" width="82" height="30"/>
+                                <state key="normal" title="update time"/>
+                                <connections>
+                                    <action selector="setTime:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1C3-Xs-xlc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ph-6b-WLl">
+                                <rect key="frame" x="165.5" y="426" width="83" height="30"/>
+                                <state key="normal" title="currentTime"/>
+                                <connections>
+                                    <action selector="startAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KIV-G2-DB6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfA-Wi-B3p">
+                                <rect key="frame" x="191.5" y="466" width="31" height="30"/>
+                                <state key="normal" title="stop"/>
+                                <connections>
+                                    <action selector="stopAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZvK-vY-xB2"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZfA-Wi-B3p" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Cee-YV-WC8"/>
+                            <constraint firstItem="4ph-6b-WLl" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Jyt-xa-RHM"/>
+                            <constraint firstItem="jYa-Ug-eJw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="PEY-un-XvH"/>
+                            <constraint firstItem="4Sh-kM-Mra" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Sjt-k0-g9V"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jYa-Ug-eJw" secondAttribute="bottom" constant="50" id="WLW-D1-RLE"/>
+                            <constraint firstItem="jYa-Ug-eJw" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="a2m-Sa-SgS"/>
+                            <constraint firstItem="jYa-Ug-eJw" firstAttribute="top" secondItem="4Sh-kM-Mra" secondAttribute="bottom" constant="60" id="ae6-U2-Sq6"/>
+                            <constraint firstItem="4Sh-kM-Mra" firstAttribute="top" secondItem="ZfA-Wi-B3p" secondAttribute="bottom" constant="10" id="rus-PN-wqB"/>
+                            <constraint firstItem="ZfA-Wi-B3p" firstAttribute="top" secondItem="4ph-6b-WLl" secondAttribute="bottom" constant="10" id="tf1-9j-Nsw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="datePicker" destination="jYa-Ug-eJw" id="Xa6-N9-4n1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="56.521739130434788" y="20.758928571428569"/>
         </scene>
     </scenes>
 </document>

@@ -15,6 +15,8 @@
 		34FFF9B122520FC100BE1441 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FFF9B022520FC100BE1441 /* main.m */; };
 		34FFF9BB22520FC100BE1441 /* TestForPopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FFF9BA22520FC100BE1441 /* TestForPopTests.m */; };
 		34FFF9C622520FC100BE1441 /* TestForPopUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FFF9C522520FC100BE1441 /* TestForPopUITests.m */; };
+		34FFF9D52252FC7600BE1441 /* ClockFace.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FFF9D42252FC7600BE1441 /* ClockFace.m */; };
+		9E3F0928127E863293E3653D /* libPods-TestForPop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0788E651AAA505F21CE2CC9B /* libPods-TestForPop.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0788E651AAA505F21CE2CC9B /* libPods-TestForPop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestForPop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FFF99E22520FBF00BE1441 /* TestForPop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestForPop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FFF9A122520FBF00BE1441 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		34FFF9A222520FBF00BE1441 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -51,6 +54,10 @@
 		34FFF9C122520FC100BE1441 /* TestForPopUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestForPopUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FFF9C522520FC100BE1441 /* TestForPopUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestForPopUITests.m; sourceTree = "<group>"; };
 		34FFF9C722520FC100BE1441 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34FFF9D32252FC7600BE1441 /* ClockFace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClockFace.h; sourceTree = "<group>"; };
+		34FFF9D42252FC7600BE1441 /* ClockFace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClockFace.m; sourceTree = "<group>"; };
+		453BB75AF28D15CE00B2F3C2 /* Pods-TestForPop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestForPop.release.xcconfig"; path = "Target Support Files/Pods-TestForPop/Pods-TestForPop.release.xcconfig"; sourceTree = "<group>"; };
+		F88237D7BBCE3704D6A650D8 /* Pods-TestForPop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestForPop.debug.xcconfig"; path = "Target Support Files/Pods-TestForPop/Pods-TestForPop.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E3F0928127E863293E3653D /* libPods-TestForPop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +93,8 @@
 				34FFF9B922520FC100BE1441 /* TestForPopTests */,
 				34FFF9C422520FC100BE1441 /* TestForPopUITests */,
 				34FFF99F22520FBF00BE1441 /* Products */,
+				F92996451406E733717C5B91 /* Pods */,
+				70EB030E32BC1B025B04C02D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +111,8 @@
 		34FFF9A022520FBF00BE1441 /* TestForPop */ = {
 			isa = PBXGroup;
 			children = (
+				34FFF9D32252FC7600BE1441 /* ClockFace.h */,
+				34FFF9D42252FC7600BE1441 /* ClockFace.m */,
 				34FFF9A122520FBF00BE1441 /* AppDelegate.h */,
 				34FFF9A222520FBF00BE1441 /* AppDelegate.m */,
 				34FFF9A422520FBF00BE1441 /* ViewController.h */,
@@ -132,6 +144,23 @@
 			path = TestForPopUITests;
 			sourceTree = "<group>";
 		};
+		70EB030E32BC1B025B04C02D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0788E651AAA505F21CE2CC9B /* libPods-TestForPop.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F92996451406E733717C5B91 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F88237D7BBCE3704D6A650D8 /* Pods-TestForPop.debug.xcconfig */,
+				453BB75AF28D15CE00B2F3C2 /* Pods-TestForPop.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,6 +168,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34FFF9CA22520FC100BE1441 /* Build configuration list for PBXNativeTarget "TestForPop" */;
 			buildPhases = (
+				780CBFF0FE53BD1ED6789841 /* [CP] Check Pods Manifest.lock */,
 				34FFF99A22520FBF00BE1441 /* Sources */,
 				34FFF99B22520FBF00BE1441 /* Frameworks */,
 				34FFF99C22520FBF00BE1441 /* Resources */,
@@ -257,12 +287,38 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		780CBFF0FE53BD1ED6789841 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TestForPop-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		34FFF99A22520FBF00BE1441 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				34FFF9A622520FBF00BE1441 /* ViewController.m in Sources */,
+				34FFF9D52252FC7600BE1441 /* ClockFace.m in Sources */,
 				34FFF9B122520FC100BE1441 /* main.m in Sources */,
 				34FFF9A322520FBF00BE1441 /* AppDelegate.m in Sources */,
 			);
@@ -433,6 +489,7 @@
 		};
 		34FFF9CB22520FC100BE1441 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F88237D7BBCE3704D6A650D8 /* Pods-TestForPop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -449,6 +506,7 @@
 		};
 		34FFF9CC22520FC100BE1441 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 453BB75AF28D15CE00B2F3C2 /* Pods-TestForPop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
