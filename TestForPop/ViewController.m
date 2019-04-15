@@ -31,12 +31,124 @@
 //    [self testForPopAnimation];
     
     [self testForClock];
+    
+//    NSString *url = @"http://www.baidu.com/";
+//    NSURLComponents *components = [NSURLComponents componentsWithString:url];
+//    NSLog(@"%@", components);
+    
+//    [self testForAnimation];
+
+    
+    [self testForShapeLayer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self stopAction:nil];
+}
+
+- (void)testForShapeLayer
+{
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(150, 170, 100, 100)];
+//    bgView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:bgView];
+    
+#if 0
+    // 不同位置的圆角
+    CGRect shapeLayerRect = CGRectMake(0, 0, 200, 300);
+    shapeLayerRect = bgView.bounds;
+    CGFloat radius = bgView.frame.size.width / 2;
+    UIRectCorner corner = UIRectCornerTopLeft | UIRectCornerBottomRight;
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:shapeLayerRect byRoundingCorners:corner cornerRadii:CGSizeMake(radius, radius)];
+    const CGFloat dash = 5.0;
+    [path setLineDash:&dash count:20 phase:4];
+    CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
+    shapeLayer.frame = shapeLayerRect;
+    shapeLayer.path = path.CGPath;
+    [shapeLayer setFillColor:[UIColor purpleColor].CGColor];
+    
+    bgView.layer.mask = shapeLayer;
+#endif
+    
+#if 1
+    // 进度条动画
+    // 创建CAShapeLayer
+    CAShapeLayer *loadingLayer = [CAShapeLayer layer];
+    loadingLayer.bounds = bgView.bounds;
+    loadingLayer.fillColor = [UIColor clearColor].CGColor;
+    loadingLayer.strokeColor = [UIColor redColor].CGColor;
+    loadingLayer.lineWidth = 2;
+    // 添加路径
+    CGPathRef path = [UIBezierPath bezierPathWithOvalInRect:bgView.bounds].CGPath;
+    loadingLayer.path = path;
+    loadingLayer.position = bgView.center;
+    [bgView.layer addSublayer:loadingLayer];
+    
+    // 添加动画
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    animation.duration = 1.5;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    animation.fromValue = @(0.0);
+    animation.toValue = @(1.0);
+    animation.fillMode = kCAFillModeForwards;
+    animation.removedOnCompletion = NO;
+    animation.repeatCount = CGFLOAT_MAX;
+    [loadingLayer addAnimation:animation forKey:nil];
+    
+#endif
+}
+
+- (void)testForAnimation
+{
+    // 0.创建背景view
+    UIView *bgView = [[UIView alloc] init];
+    bgView.backgroundColor = [UIColor grayColor];
+    CGFloat bgViewX = self.view.frame.size.width * 0.5  ;
+    CGFloat bgViewY = 300;
+    CGFloat bgViewW = 200;
+    CGFloat bgViewH = 200;
+    bgView.center = CGPointMake(bgViewX, bgViewY);
+    bgView.bounds = CGRectMake(0, 0, bgViewW, bgViewH);
+    [self.view addSubview:bgView];
+    
+    // 1.创建复制图层 可以把图层里面所有子层复制
+    CAReplicatorLayer *repL = [CAReplicatorLayer layer];
+    repL.frame = bgView.bounds;
+    [bgView.layer addSublayer:repL];
+    
+    CALayer *layer = [CALayer layer];
+    layer.anchorPoint = CGPointMake(0.5, 1);
+    layer.position = CGPointMake(15, bgView.bounds.size.height);
+    layer.bounds = CGRectMake(0, 0, 10, 150);
+    layer.backgroundColor = [UIColor whiteColor].CGColor;
+    [repL addSublayer:layer];
+    
+    // 2.创建动画
+    CABasicAnimation *anim = [CABasicAnimation animation];
+    anim.keyPath = @"transform.scale.y";
+    anim.toValue = @0.1;
+    anim.duration = 0.3;
+    anim.repeatCount = MAXFLOAT;
+    
+    // 设置反转动画
+    anim.autoreverses = YES;
+    [layer addAnimation:anim forKey:nil];
+    
+    // 复制层中子层总数
+    // instanceCount：表示复制层里面有多少个子层，包括原始层
+    repL.instanceCount = 3;
+    
+    // 设置复制子层偏移量，不包括原始层,相对于原始层x偏移
+    repL.instanceTransform = CATransform3DMakeTranslation(15, 0, 0);
+    
+    // 设置复制层动画延迟时间
+    repL.instanceDelay = 0.1;
+    
+    // 如果设置了原始层背景色，就不需要设置这个属性
+    repL.instanceColor = [UIColor greenColor].CGColor;
+    
+//    repL.instanceGreenOffset = -0.3;
 }
 
 #pragma mark - Test for Clock
