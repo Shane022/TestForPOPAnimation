@@ -1,16 +1,20 @@
 PODS:
   - pop (1.0.12)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
   - pop (~> 1.0)
+  - YYText
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - pop
+    - YYText
 
 SPEC CHECKSUMS:
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 9b8d675d61448888d418ed0b22e0d4ecbb221def
+PODFILE CHECKSUM: 09be86cdb43f8a337e63a015e9fd55a8dddb4de5
 
 COCOAPODS: 1.6.1

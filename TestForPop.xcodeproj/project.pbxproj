@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		340689C52265B93700508995 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 340689C42265B93700508995 /* TestViewController.m */; };
 		34FFF9A322520FBF00BE1441 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FFF9A222520FBF00BE1441 /* AppDelegate.m */; };
 		34FFF9A622520FBF00BE1441 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FFF9A522520FBF00BE1441 /* ViewController.m */; };
 		34FFF9A922520FBF00BE1441 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34FFF9A722520FBF00BE1441 /* Main.storyboard */; };
@@ -38,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		0788E651AAA505F21CE2CC9B /* libPods-TestForPop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestForPop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		340689C32265B93700508995 /* TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		340689C42265B93700508995 /* TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		34FFF99E22520FBF00BE1441 /* TestForPop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestForPop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FFF9A122520FBF00BE1441 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		34FFF9A222520FBF00BE1441 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -122,6 +125,8 @@
 				34FFF9AC22520FC100BE1441 /* LaunchScreen.storyboard */,
 				34FFF9AF22520FC100BE1441 /* Info.plist */,
 				34FFF9B022520FC100BE1441 /* main.m */,
+				340689C32265B93700508995 /* TestViewController.h */,
+				340689C42265B93700508995 /* TestViewController.m */,
 			);
 			path = TestForPop;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 				34FFF9D52252FC7600BE1441 /* ClockFace.m in Sources */,
 				34FFF9B122520FC100BE1441 /* main.m in Sources */,
 				34FFF9A322520FBF00BE1441 /* AppDelegate.m in Sources */,
+				340689C52265B93700508995 /* TestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

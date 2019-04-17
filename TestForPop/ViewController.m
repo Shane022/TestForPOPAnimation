@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <pop/POP.h>
 #import "ClockFace.h"
+#import "TestViewController.h"
 
 @interface ViewController ()
 
@@ -17,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (nonatomic, strong) ClockFace *clockFace;
 @property (nonatomic, strong) NSTimer *timer;
-
+@property (nonatomic, strong) UIButton *btnSkip;
 
 @end
 
@@ -25,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setupSubViews];
     
 //    [self.view addSubview:self.baseView];
 //    [self testForPopAnimation];
@@ -39,13 +40,66 @@
 //    [self testForAnimation];
 
     
-    [self testForShapeLayer];
+//    [self testForShapeLayer];
+    
+//    [self testForLayerRotation];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self stopAction:nil];
+}
+
+- (void)setupSubViews
+{
+    [self.view addSubview:self.btnSkip];
+}
+
+- (void)onHitBtnSkip:(UIButton *)sender
+{
+    TestViewController *testVC = [[TestViewController alloc] init];
+    [self.navigationController pushViewController:testVC animated:YES];
+}
+
+#pragma mark -
+- (void)testForLayerRotation
+{
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(250, 270, 100, 100)];
+    bgView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:bgView];
+    
+    // X
+#if 0
+    CABasicAnimation *theAnimation;
+    theAnimation=[CABasicAnimation animationWithKeyPath:@"transform.rotation.x"];
+    theAnimation.duration=8;
+    theAnimation.removedOnCompletion = YES;
+    theAnimation.fromValue = [NSNumber numberWithFloat:0];
+    theAnimation.toValue = [NSNumber numberWithFloat:3.1415926];
+    [bgView.layer addAnimation:theAnimation forKey:@"animateTransform"];
+#endif
+    // Y
+#if 0
+    CABasicAnimation *theAnimation;
+    theAnimation=[CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
+    theAnimation.duration=8;
+    theAnimation.removedOnCompletion = YES;
+    theAnimation.fromValue = [NSNumber numberWithFloat:0];
+    theAnimation.toValue = [NSNumber numberWithFloat:3.1415926];
+    [bgView.layer addAnimation:theAnimation forKey:@"animateTransform"];
+#endif
+    // Z
+#if 1
+    CABasicAnimation *theAnimation;
+    theAnimation=[CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    theAnimation.duration = 3;
+    theAnimation.removedOnCompletion = YES;
+    theAnimation.fromValue = [NSNumber numberWithFloat:0];
+    theAnimation.toValue = [NSNumber numberWithFloat:M_PI];
+    theAnimation.repeatCount = CGFLOAT_MAX;
+    [bgView.layer addAnimation:theAnimation forKey:@"animateTransform"];
+#endif
 }
 
 - (void)testForShapeLayer
@@ -90,7 +144,7 @@
     animation.duration = 1.5;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     animation.fromValue = @(0.0);
-    animation.toValue = @(1.0);
+    animation.toValue = @(0.7);
     animation.fillMode = kCAFillModeForwards;
     animation.removedOnCompletion = NO;
     animation.repeatCount = CGFLOAT_MAX;
@@ -228,6 +282,22 @@
     
     return _baseView;
 
+}
+
+- (UIButton *)btnSkip
+{
+    if (!_btnSkip) {
+        CGFloat btnWidth = 60;
+        CGFloat btnHeight = 30;
+        CGSize screenSize = [UIScreen mainScreen].bounds.size;
+        _btnSkip = [UIButton buttonWithType:UIButtonTypeCustom];
+        _btnSkip.frame = CGRectMake(screenSize.width - btnWidth - 16, 100, btnWidth, btnHeight);
+        [_btnSkip setTitle:@"skip" forState:UIControlStateNormal];
+        [_btnSkip setBackgroundColor:[UIColor redColor]];
+        [_btnSkip addTarget:self action:@selector(onHitBtnSkip:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _btnSkip;
 }
 
 
