@@ -10,6 +10,9 @@
 #import <pop/POP.h>
 #import "ClockFace.h"
 #import "TestViewController.h"
+#import "MusicViewController.h"
+#import "ColorController.h"
+#import <ChameleonFramework/Chameleon.h>
 
 @interface ViewController ()
 
@@ -19,6 +22,8 @@
 @property (nonatomic, strong) ClockFace *clockFace;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) UIButton *btnSkip;
+@property (nonatomic, strong) UIButton *btnSkipMusic;
+@property (nonatomic, strong) UIButton *btnSkipColor;
 
 @end
 
@@ -54,6 +59,8 @@
 - (void)setupSubViews
 {
     [self.view addSubview:self.btnSkip];
+    [self.view addSubview:self.btnSkipMusic];
+    [self.view addSubview:self.btnSkipColor];
 }
 
 - (void)onHitBtnSkip:(UIButton *)sender
@@ -62,7 +69,20 @@
     [self.navigationController pushViewController:testVC animated:YES];
 }
 
+- (void)onHitBtnSkipMusic:(UIButton *)sender
+{
+    MusicViewController *musicVC = [[MusicViewController alloc] init];
+    [self.navigationController pushViewController:musicVC animated:YES];
+}
+
+- (void)onHitBtnSkipColor:(UIButton *)sender
+{
+    ColorController *colorVC = [[ColorController alloc] init];
+    [self.navigationController pushViewController:colorVC animated:YES];
+}
+
 #pragma mark -
+
 - (void)testForLayerRotation
 {
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(250, 270, 100, 100)];
@@ -293,12 +313,47 @@
         _btnSkip = [UIButton buttonWithType:UIButtonTypeCustom];
         _btnSkip.frame = CGRectMake(screenSize.width - btnWidth - 16, 100, btnWidth, btnHeight);
         [_btnSkip setTitle:@"skip" forState:UIControlStateNormal];
-        [_btnSkip setBackgroundColor:[UIColor redColor]];
+        [_btnSkip setBackgroundColor:[UIColor flatLimeColor]];
         [_btnSkip addTarget:self action:@selector(onHitBtnSkip:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _btnSkip;
 }
+
+- (UIButton *)btnSkipMusic
+{
+    if (!_btnSkipMusic) {
+        CGFloat btnWidth = 60;
+        CGFloat btnHeight = 30;
+        CGSize screenSize = [UIScreen mainScreen].bounds.size;
+        _btnSkipMusic = [UIButton buttonWithType:UIButtonTypeCustom];
+        _btnSkipMusic.frame = CGRectMake(screenSize.width - btnWidth - 16, 180, btnWidth, btnHeight);
+        [_btnSkipMusic setTitle:@"music" forState:UIControlStateNormal];
+        [_btnSkipMusic setBackgroundColor:[UIColor flatMintColor]];
+        [_btnSkipMusic addTarget:self action:@selector(onHitBtnSkipMusic:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _btnSkipMusic;
+}
+
+
+- (UIButton *)btnSkipColor
+{
+    if (!_btnSkipColor) {
+        CGFloat btnWidth = 60;
+        CGFloat btnHeight = 30;
+        CGSize screenSize = [UIScreen mainScreen].bounds.size;
+        _btnSkipColor = [UIButton buttonWithType:UIButtonTypeCustom];
+        _btnSkipColor.frame = CGRectMake(screenSize.width - btnWidth - 16, 260, btnWidth, btnHeight);
+        [_btnSkipColor setTitle:@"color" forState:UIControlStateNormal];
+        [_btnSkipColor setBackgroundColor:[UIColor flatTealColor]];
+        [_btnSkipColor addTarget:self action:@selector(onHitBtnSkipColor:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _btnSkipColor;
+}
+
+
 
 
 @end

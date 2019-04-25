@@ -1,20 +1,30 @@
 PODS:
+  - ChameleonFramework (2.1.0):
+    - ChameleonFramework/Default (= 2.1.0)
+  - ChameleonFramework/Default (2.1.0)
   - pop (1.0.12)
+  - SVProgressHUD (2.2.5)
   - YYText (1.0.7)
 
 DEPENDENCIES:
+  - ChameleonFramework
   - pop (~> 1.0)
+  - SVProgressHUD (~> 2.2.5)
   - YYText
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - ChameleonFramework
     - pop
+    - SVProgressHUD
     - YYText
 
 SPEC CHECKSUMS:
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 09be86cdb43f8a337e63a015e9fd55a8dddb4de5
+PODFILE CHECKSUM: 780a3d44607a7cc779c51bd81c658fc650f1841a
 
 COCOAPODS: 1.6.1

@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3401D801226EF688006EB588 /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3401D800226EF688006EB588 /* MusicViewController.m */; };
 		340689C52265B93700508995 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 340689C42265B93700508995 /* TestViewController.m */; };
+		340A7CAD2271883B0053BCA0 /* MusicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 340A7CAC2271883B0053BCA0 /* MusicView.m */; };
+		340A7CB02271884A0053BCA0 /* MusicInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 340A7CAF2271884A0053BCA0 /* MusicInfoView.m */; };
+		340A7CB3227188660053BCA0 /* MusicLyricView.m in Sources */ = {isa = PBXBuildFile; fileRef = 340A7CB2227188660053BCA0 /* MusicLyricView.m */; };
+		340A7CB5227188740053BCA0 /* MusicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 340A7CB4227188740053BCA0 /* MusicView.xib */; };
+		34710E492269DC7100FE20D8 /* TwoSidesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34710E482269DC7100FE20D8 /* TwoSidesView.m */; };
+		34F0D9822270280000FF6673 /* ColorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F0D9812270280000FF6673 /* ColorController.m */; };
 		34FFF9A322520FBF00BE1441 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FFF9A222520FBF00BE1441 /* AppDelegate.m */; };
 		34FFF9A622520FBF00BE1441 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FFF9A522520FBF00BE1441 /* ViewController.m */; };
 		34FFF9A922520FBF00BE1441 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34FFF9A722520FBF00BE1441 /* Main.storyboard */; };
@@ -39,8 +46,21 @@
 
 /* Begin PBXFileReference section */
 		0788E651AAA505F21CE2CC9B /* libPods-TestForPop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestForPop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3401D7FF226EF688006EB588 /* MusicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicViewController.h; sourceTree = "<group>"; };
+		3401D800226EF688006EB588 /* MusicViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicViewController.m; sourceTree = "<group>"; };
 		340689C32265B93700508995 /* TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		340689C42265B93700508995 /* TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		340A7CAB2271883B0053BCA0 /* MusicView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicView.h; sourceTree = "<group>"; };
+		340A7CAC2271883B0053BCA0 /* MusicView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicView.m; sourceTree = "<group>"; };
+		340A7CAE2271884A0053BCA0 /* MusicInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicInfoView.h; sourceTree = "<group>"; };
+		340A7CAF2271884A0053BCA0 /* MusicInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicInfoView.m; sourceTree = "<group>"; };
+		340A7CB1227188660053BCA0 /* MusicLyricView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicLyricView.h; sourceTree = "<group>"; };
+		340A7CB2227188660053BCA0 /* MusicLyricView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicLyricView.m; sourceTree = "<group>"; };
+		340A7CB4227188740053BCA0 /* MusicView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicView.xib; sourceTree = "<group>"; };
+		34710E472269DC7100FE20D8 /* TwoSidesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwoSidesView.h; sourceTree = "<group>"; };
+		34710E482269DC7100FE20D8 /* TwoSidesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwoSidesView.m; sourceTree = "<group>"; };
+		34F0D9802270280000FF6673 /* ColorController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorController.h; sourceTree = "<group>"; };
+		34F0D9812270280000FF6673 /* ColorController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorController.m; sourceTree = "<group>"; };
 		34FFF99E22520FBF00BE1441 /* TestForPop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestForPop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FFF9A122520FBF00BE1441 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		34FFF9A222520FBF00BE1441 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -89,6 +109,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34214C9322717D7A0048F8F4 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				340A7CAB2271883B0053BCA0 /* MusicView.h */,
+				340A7CAC2271883B0053BCA0 /* MusicView.m */,
+				340A7CB4227188740053BCA0 /* MusicView.xib */,
+				340A7CAE2271884A0053BCA0 /* MusicInfoView.h */,
+				340A7CAF2271884A0053BCA0 /* MusicInfoView.m */,
+				340A7CB1227188660053BCA0 /* MusicLyricView.h */,
+				340A7CB2227188660053BCA0 /* MusicLyricView.m */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
 		34FFF99522520FBF00BE1441 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +148,7 @@
 		34FFF9A022520FBF00BE1441 /* TestForPop */ = {
 			isa = PBXGroup;
 			children = (
+				34214C9322717D7A0048F8F4 /* Music */,
 				34FFF9D32252FC7600BE1441 /* ClockFace.h */,
 				34FFF9D42252FC7600BE1441 /* ClockFace.m */,
 				34FFF9A122520FBF00BE1441 /* AppDelegate.h */,
@@ -127,6 +162,12 @@
 				34FFF9B022520FC100BE1441 /* main.m */,
 				340689C32265B93700508995 /* TestViewController.h */,
 				340689C42265B93700508995 /* TestViewController.m */,
+				34710E472269DC7100FE20D8 /* TwoSidesView.h */,
+				34710E482269DC7100FE20D8 /* TwoSidesView.m */,
+				3401D7FF226EF688006EB588 /* MusicViewController.h */,
+				3401D800226EF688006EB588 /* MusicViewController.m */,
+				34F0D9802270280000FF6673 /* ColorController.h */,
+				34F0D9812270280000FF6673 /* ColorController.m */,
 			);
 			path = TestForPop;
 			sourceTree = "<group>";
@@ -177,6 +218,7 @@
 				34FFF99A22520FBF00BE1441 /* Sources */,
 				34FFF99B22520FBF00BE1441 /* Frameworks */,
 				34FFF99C22520FBF00BE1441 /* Resources */,
+				80C413285E1874FDC126587A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -272,6 +314,7 @@
 			files = (
 				34FFF9AE22520FC100BE1441 /* LaunchScreen.storyboard in Resources */,
 				34FFF9AB22520FC100BE1441 /* Assets.xcassets in Resources */,
+				340A7CB5227188740053BCA0 /* MusicView.xib in Resources */,
 				34FFF9A922520FBF00BE1441 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,6 +358,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		80C413285E1874FDC126587A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TestForPop/Pods-TestForPop-resources.sh",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TestForPop/Pods-TestForPop-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -322,11 +387,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				340A7CB02271884A0053BCA0 /* MusicInfoView.m in Sources */,
 				34FFF9A622520FBF00BE1441 /* ViewController.m in Sources */,
 				34FFF9D52252FC7600BE1441 /* ClockFace.m in Sources */,
+				340A7CB3227188660053BCA0 /* MusicLyricView.m in Sources */,
+				340A7CAD2271883B0053BCA0 /* MusicView.m in Sources */,
+				3401D801226EF688006EB588 /* MusicViewController.m in Sources */,
+				34710E492269DC7100FE20D8 /* TwoSidesView.m in Sources */,
 				34FFF9B122520FC100BE1441 /* main.m in Sources */,
 				34FFF9A322520FBF00BE1441 /* AppDelegate.m in Sources */,
 				340689C52265B93700508995 /* TestViewController.m in Sources */,
+				34F0D9822270280000FF6673 /* ColorController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
