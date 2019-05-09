@@ -2,29 +2,39 @@ PODS:
   - ChameleonFramework (2.1.0):
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
+  - lottie-ios (2.5.3)
   - pop (1.0.12)
   - SVProgressHUD (2.2.5)
+  - YYCategories (1.0.4):
+    - YYCategories/no-arc (= 1.0.4)
+  - YYCategories/no-arc (1.0.4)
   - YYText (1.0.7)
 
 DEPENDENCIES:
   - ChameleonFramework
+  - lottie-ios
   - pop (~> 1.0)
   - SVProgressHUD (~> 2.2.5)
+  - YYCategories (~> 1.0.4)
   - YYText
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - ChameleonFramework
+    - lottie-ios
     - pop
     - SVProgressHUD
+    - YYCategories
     - YYText
 
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 780a3d44607a7cc779c51bd81c658fc650f1841a
+PODFILE CHECKSUM: e392da2ed778aae12294a88602c578bc89a175bc
 
 COCOAPODS: 1.6.1

@@ -10,6 +10,8 @@
 #import "YYText.h"
 #import "TwoSidesView.h"
 #import <ChameleonFramework/Chameleon.h>
+#import "NSString+Animation.h"
+#import <Lottie/Lottie.h>
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -25,6 +27,8 @@ static CGFloat sectorWidth = 200;
 @property (nonatomic, assign) CGFloat progress;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) TwoSidesView *twoSidesView;
+
+@property (nonatomic, strong) LOTAnimationView *animationView;
 
 
 @end
@@ -57,7 +61,19 @@ static CGFloat sectorWidth = 200;
     
 //    [self testForLayerAction];
     
-    [self testForChameleon];
+//    [self testForChameleon];
+    
+//    [self testForLayerScaleAnimation];
+    
+//    [self testForTextPath];
+    
+//    [self testForPathAnimation];
+    
+//    [self testForLoadingView];
+    
+    [self testForDotLoadingView];
+    
+//    [self testForLottie];
 }
 
 #pragma mark -
@@ -70,6 +86,138 @@ static CGFloat sectorWidth = 200;
 }
 
 #pragma mark - Test Demo
+
+- (void)testForLottie
+{
+    self.animationView = [LOTAnimationView animationNamed:@"jiazaidonghua1"];
+    self.animationView.frame = CGRectMake(100, 100, 306, 108);
+    self.animationView.contentMode = UIViewContentModeScaleAspectFit;
+    self.animationView.loopAnimation = YES;
+    self.animationView.animationSpeed = 1.f;
+
+    [self.view addSubview:self.animationView];
+}
+
+- (void)testForDotLoadingView
+{
+    
+}
+
+- (void)testForLoadingView
+{
+    self.view.backgroundColor = [UIColor blackColor];
+    CGFloat topGap = 290;
+    CGFloat leftGap = 16;
+    CGFloat width = self.view.frame.size.width - leftGap * 2;
+    CGFloat height = 3;
+    
+    //
+    {
+        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(leftGap, 200, 180, 60)];
+        UIImage *image = [UIImage imageNamed:@"login_Logo.tiff"];
+        logoView.image = image;
+        logoView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.view addSubview:logoView];
+        
+        logoView.center = CGPointMake(self.view.frame.size.width / 2, logoView.center.y);
+    }
+    
+    //
+    {
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(leftGap, topGap, width, height)];
+        [self.view addSubview:bgView];
+        
+        CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+        gradientLayer.frame = bgView.bounds;
+        UIColor *centerColor = HexColor(@"00EE00");
+        UIColor *sideColor = HexColorWithAlpha(@"00EE00", 0.5);
+        gradientLayer.colors = @[(__bridge id)sideColor.CGColor, (__bridge id)centerColor.CGColor, (__bridge id)sideColor.CGColor];
+        gradientLayer.locations = @[@0.0, @0.5, @1.0];
+        gradientLayer.startPoint = CGPointMake(0, 0);
+        gradientLayer.endPoint = CGPointMake(1, 0);
+        [bgView.layer addSublayer:gradientLayer];
+        
+        UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:bgView.bounds];
+        CAShapeLayer *layer = [CAShapeLayer layer];
+        layer.frame = bgView.bounds;
+        layer.path = path.CGPath;
+        bgView.layer.mask = layer;
+    }
+    // Slider
+    {
+        CGFloat sliderWidth = 55;
+        UIView *sliderView = [[UIView alloc] initWithFrame:CGRectMake(leftGap, topGap, sliderWidth, height)];
+        [self.view addSubview:sliderView];
+        
+        CAGradientLayer *sliderGradientLayer = [CAGradientLayer layer];
+        sliderGradientLayer.frame = sliderView.bounds;
+        UIColor *sliderCenterColor = HexColorWithAlpha(@"ffffff", 0.7);
+        UIColor *sliderSideColor = HexColorWithAlpha(@"ffffff", 0.3);
+        sliderGradientLayer.colors = @[(__bridge id)sliderSideColor.CGColor, (__bridge id)sliderCenterColor.CGColor, (__bridge id)sliderSideColor.CGColor];
+        sliderGradientLayer.locations = @[@0.0, @.5, @1.0];
+        sliderGradientLayer.startPoint = CGPointMake(0, 0);
+        sliderGradientLayer.endPoint = CGPointMake(1, 0);
+        [sliderView.layer addSublayer:sliderGradientLayer];
+        
+        UIBezierPath *sliderPath = [UIBezierPath bezierPathWithOvalInRect:sliderView.bounds];
+        CAShapeLayer *sliderLayer = [CAShapeLayer layer];
+        sliderLayer.frame = sliderView.bounds;
+        sliderLayer.path = sliderPath.CGPath;
+        
+        sliderView.layer.mask = sliderLayer;
+
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position.x"];
+        animation.fromValue = @(0);
+        animation.toValue = @(width);
+        animation.repeatCount = CGFLOAT_MAX;
+        animation.duration = 1.5;
+
+        [sliderView.layer addAnimation:animation forKey:@"position.x"];
+    }
+}
+
+- (void)testForTextPath
+{
+    [@"窗前明月光，疑是地上霜。" animateOnView:self.view atRect:CGRectMake(120, 20, 200, 200) forFont:[UIFont systemFontOfSize:30] withColor:[UIColor redColor] andDuration:0.7];
+}
+
+- (void)testForPathAnimation
+{
+    UIView *circleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    circleView.backgroundColor = [UIColor flatOrangeColor];
+    circleView.layer.cornerRadius = 100 / 2;
+    circleView.layer.masksToBounds = YES;
+    [self.view addSubview:circleView];
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(100, 200, 200, 300)];
+    
+    CAKeyframeAnimation *keyAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    keyAnimation.path = path.CGPath;
+    keyAnimation.duration = 0.8;
+    keyAnimation.removedOnCompletion = NO;
+    
+    [circleView.layer addAnimation:keyAnimation forKey:@"position"];
+}
+
+- (void)testForLayerScaleAnimation
+{
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+    bgView.backgroundColor = [UIColor redColor];
+    bgView.center = self.view.center;
+    [self.view addSubview:bgView];
+    
+    // KeyframeAnimation Scale
+    CAKeyframeAnimation *keyAnimation = [CAKeyframeAnimation animation];
+#if 1
+    keyAnimation.keyPath = @"transform.scale";
+#endif
+    keyAnimation.values = @[@1.0,@1.3,@0.9,@1.15,@0.95,@1.02,@1.0];
+    keyAnimation.calculationMode = kCAAnimationCubic;
+    keyAnimation.duration = 1;
+    keyAnimation.repeatCount = CGFLOAT_MAX;
+    [bgView.layer addAnimation:keyAnimation forKey:nil];
+}
+
 - (void)testForChameleon
 {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 300, 300)];

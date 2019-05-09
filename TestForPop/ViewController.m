@@ -12,6 +12,8 @@
 #import "TestViewController.h"
 #import "MusicViewController.h"
 #import "ColorController.h"
+#import "SingerInfoController.h"
+
 #import <ChameleonFramework/Chameleon.h>
 
 @interface ViewController ()
@@ -71,8 +73,13 @@
 
 - (void)onHitBtnSkipMusic:(UIButton *)sender
 {
+#if 0
     MusicViewController *musicVC = [[MusicViewController alloc] init];
     [self.navigationController pushViewController:musicVC animated:YES];
+#else
+    SingerInfoController *singerInfoVC = [[SingerInfoController alloc] init];
+    [self.navigationController pushViewController:singerInfoVC animated:YES];
+#endif
 }
 
 - (void)onHitBtnSkipColor:(UIButton *)sender

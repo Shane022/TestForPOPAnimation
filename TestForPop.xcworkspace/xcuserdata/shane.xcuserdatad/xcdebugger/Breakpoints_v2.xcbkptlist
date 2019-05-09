@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TestForPop/TestViewController.m"
-            timestampString = "577777540.891425"
+            timestampString = "578912660.795126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "-testForCoin"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TestForPop/TestViewController.m"
-            timestampString = "577777540.891551"
+            timestampString = "578912660.795458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
             landmarkName = "-testForBezierPath"
             landmarkType = "7">
          </BreakpointContent>
