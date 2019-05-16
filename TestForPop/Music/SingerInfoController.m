@@ -8,115 +8,159 @@
 
 #import "SingerInfoController.h"
 #import <UIView+YYAdd.h>
+#import "Chameleon.h"
 
-#define kHEIGHT 198
+typedef NS_ENUM(NSInteger, Direction) {
+    DotViewDirectionLeft = 1,
+    DotViewDirectionRight = -1
+};
 
-@interface SingerInfoController ()<UITableViewDelegate, UITableViewDataSource>
-
-@property (nonatomic, strong) UITableView *contentView;
-@property (nonatomic, strong) UIImageView *headerView;
-
-@property (nonatomic, copy) void(^listScrollViewScrollBlock)(UIScrollView *scrollView);
-
+@interface SingerInfoController ()
 @end
 
 @implementation SingerInfoController
+{
+    CADisplayLink *_link;
+    NSMutableArray *_arrDots;
+    
+    CGFloat _startPointX;
+    CGFloat _endPointX;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupSubviews];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self testForCADisplayLink];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
- 
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
+    
+    [self stopLink];
 }
 
-- (void)setupSubviews
+#pragma mark - Test for CADisplayLink
+- (void)testForCADisplayLink
 {
-    self.view.backgroundColor = [UIColor whiteColor];
+    _arrDots = [NSMutableArray arrayWithCapacity:0];
+    NSInteger number = 2;
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    CGFloat dotWidth = 40;
+    CGFloat dotViewGap = 15;
+    CGFloat topGap = 150;
+    CGFloat leftGap = (screenSize.width - dotWidth * number - dotViewGap) / 2;
     
-    [self.view addSubview:self.contentView];
-    [self.view addSubview:self.headerView];
-
-    self.contentView.frame = self.view.frame;
-    self.contentView.tableHeaderView = self.headerView;
+    NSArray *arrColors = @[[UIColor flatRedColor], [UIColor flatSkyBlueColor]];
     
-    if (@available(iOS 11.0, *)) {
-        self.contentView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-}
-
-#pragma mark - <UIScrollViewDelegate>
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView == self.contentView) {
-        CGPoint point = scrollView.contentOffset;
-        CGFloat offsetY = point.y;
-        self.contentView.contentInset = UIEdgeInsetsMake(offsetY, 0, 0, 0);
+    for (NSInteger i = 0; i < number; i++) {
+        UIView *dotView = [[UIView alloc] initWithFrame:CGRectMake(leftGap + (dotViewGap + dotWidth) * i, topGap, dotWidth, dotWidth)];
+        dotView.backgroundColor = arrColors[i];
+        [_arrDots addObject:dotView];
+        [self.view addSubview:dotView];
         
-    
-        NSLog(@"%lf", offsetY);
-    }
-}
-
-#pragma mark - <UITableViewDelegate && UITableViewDataSource>
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 100;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellId"];
-    }
-    cell.textLabel.text = [NSString stringWithFormat:@"第%ld行信息", (long)indexPath.row];
-    
-    return cell;
-}
-
-#pragma mark - Lazy Load
-- (UITableView *)contentView
-{
-    if (!_contentView) {
-        _contentView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _contentView.delegate = self;
-        _contentView.dataSource = self;
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:dotView.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(dotWidth / 2, dotWidth / 2)];
+        CAShapeLayer *dotLayer = [CAShapeLayer layer];
+        dotLayer.frame = dotView.bounds;
+        dotLayer.path = path.CGPath;
+        dotView.layer.mask = dotLayer;
         
-//        _contentView.contentInset = UIEdgeInsetsMake(kHEIGHT, 0, 0, 0);
+        [self addAnimationForDotView:dotView];
+        
+        if (i == 0) {
+            [self.view bringSubviewToFront:dotView];
+            dotView.tag = DotViewDirectionLeft;
+        } else {
+            [self.view sendSubviewToBack:dotView];
+            dotView.tag = DotViewDirectionRight;
+        }
     }
     
-    return _contentView;
+    
+    [self startLink];
 }
 
-- (UIImageView *)headerView
+- (void)addAnimationForDotView:(UIView *)dotView
 {
-    if (!_headerView) {
-        _headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 210)];
-        _headerView.backgroundColor = [UIColor redColor];
+    NSInteger number = 2;
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    CGFloat dotWidth = 40;
+    CGFloat dotViewGap = 20;
+    CGFloat leftGap = (screenSize.width - dotWidth * number - dotViewGap) / 2;
+    CGFloat wholePath = leftGap + dotWidth * number + dotViewGap;
+    CGFloat startPoint = dotView.tag == DotViewDirectionLeft ? leftGap : wholePath;
+    CGFloat endPoint = dotView.tag == DotViewDirectionLeft ? wholePath : leftGap;
+    _startPointX = (leftGap + dotWidth / 2);
+    _endPointX = (wholePath - dotWidth / 2);
+    
+    CAKeyframeAnimation *keyAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.x"];
+    keyAnimation.duration = 10.f;
+    keyAnimation.repeatCount = CGFLOAT_MAX;
+    keyAnimation.values = @[@(startPoint), @(endPoint), @(startPoint)];
+    
+//    [dotView.layer addAnimation:keyAnimation forKey:@"positionX"];
+}
+
+- (void)startLink
+{
+    if (!_link) {
+        _link = [CADisplayLink displayLinkWithTarget:self selector:@selector(positionAnimation)];
+    }
+    [_link addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+}
+
+- (void)stopLink
+{
+    [_link removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    _link = nil;
+}
+
+- (void)positionAnimation
+{
+    UIView *leftDotView = _arrDots.firstObject;
+    UIView *rightDotView = _arrDots.lastObject;
+    
+    NSInteger leftDirection = leftDotView.tag;
+    NSInteger rightDirection = rightDotView.tag;
+    
+    NSInteger number = 2;
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    CGFloat dotWidth = 40;
+    CGFloat dotViewGap = 20;
+    CGFloat leftGap = (screenSize.width - dotWidth * number - dotViewGap) / 2;
+    CGFloat wholePath = leftGap + dotWidth * number + dotViewGap;
+    CGFloat startCenterX = leftGap + dotWidth / 2;
+    CGFloat endCenterX = wholePath - dotWidth / 2;
+    
+    CGPoint leftDotCenter = leftDotView.center;
+    CGPoint rightDotCenter = rightDotView.center;
+    
+    if (leftDotCenter.x >= endCenterX || leftDotCenter.x < startCenterX) {
+        leftDirection = -1 * leftDirection;
+        if (leftDirection < 0) {
+            [self.view sendSubviewToBack:leftDotView];
+            [self.view bringSubviewToFront:rightDotView];
+        }
     }
     
-    return _headerView;
+    if (rightDotCenter.x <= startCenterX || rightDotCenter.x > endCenterX) {
+        rightDirection = -1 * rightDirection;
+        if (rightDirection < 0) {
+            [self.view sendSubviewToBack:rightDotView];
+            [self.view bringSubviewToFront:leftDotView];
+        }
+    }
+
+    leftDotCenter.x += leftDirection * 2;
+    leftDotView.center = leftDotCenter;
+    
+    rightDotCenter.x += rightDirection * 2;
+    rightDotView.center = rightDotCenter;
+    
+    leftDotView.tag = leftDirection;
+    rightDotView.tag = rightDirection;
 }
 
 - (void)dealloc

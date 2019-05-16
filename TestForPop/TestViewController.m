@@ -20,7 +20,13 @@
 static CGFloat imageWidth = 200;
 static CGFloat sectorWidth = 200;
 
-@interface TestViewController ()
+typedef NS_ENUM(NSInteger, DotDirection)
+{
+    DotDirectionLeft = 1,
+    DotDirectionRight = -1,
+};
+
+@interface TestViewController ()<CAAnimationDelegate>
 
 @property (nonatomic, strong) UIImageView *coverImageView;
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
@@ -71,9 +77,13 @@ static CGFloat sectorWidth = 200;
     
 //    [self testForLoadingView];
     
-    [self testForDotLoadingView];
+//    [self testForDotLoadingView];
     
-//    [self testForLottie];
+//    [self testForMask];
+    
+//    [self testForTwoDotAnimation];
+    
+    [self testForLoadingAnimation];
 }
 
 #pragma mark -
@@ -85,11 +95,103 @@ static CGFloat sectorWidth = 200;
     [self testForCoverImageWithAnimated:NO];
 }
 
+#pragma mark - <CAAnimationDelegate>
+- (void)animationDidStart:(CAAnimation *)anim
+{
+    NSLog(@"start");
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    NSLog(@"stop");
+}
+
 #pragma mark - Test Demo
+
+- (void)testForLoadingAnimation
+{
+    CGFloat leftGap = 20;
+    CGFloat topGap = 200;
+    CGFloat width = 40;
+    CGFloat height = 90;
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(leftGap, topGap, width, height)];
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.path = path.CGPath;
+    layer.frame = CGRectMake(0, 0, width, height);
+    layer.fillColor = [UIColor flatRedColor].CGColor;
+    
+    CAReplicatorLayer *repLayer = [CAReplicatorLayer layer];
+    [repLayer addSublayer:layer];
+    repLayer.instanceColor = [UIColor flatRedColor].CGColor;
+    repLayer.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
+    repLayer.instanceCount = 7;
+    repLayer.instanceTransform = CATransform3DMakeTranslation(width + 2, 0, 0);
+    
+    [self.view.layer addSublayer:repLayer];
+}
+
+- (void)testForTwoDotAnimation
+{
+    // 
+    
+    
+    
+    
+    
+    CGFloat dotWidth = 60;
+    CGFloat dotGap = 10;
+    CGFloat leftGap = (self.view.frame.size.width - dotWidth * 2 - dotGap) / 2;
+    NSArray *arrColors = @[[UIColor flatRedColor], [UIColor flatSkyBlueColor]];
+    
+    for (NSInteger i = 0; i < 2; i++) {
+        UIView *dot = [[UIView alloc] initWithFrame:CGRectMake(leftGap + (dotWidth + dotGap) * i, 200, dotWidth, dotWidth)];
+        DotDirection direction = i == 0 ? DotDirectionLeft : DotDirectionRight;
+        dot.tag = direction;
+        dot.backgroundColor = arrColors[i];
+        dot.layer.cornerRadius = dotWidth / 2;
+        dot.layer.masksToBounds = YES;
+        [self addAnimationForDot:dot];
+        [self.view addSubview:dot];
+        
+        CGFloat labelHeight = dotWidth - 5 * 2;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, (dotWidth - labelHeight) / 2, dotWidth, labelHeight)];
+        label.text = @"测试";
+        label.textColor = [UIColor flatWhiteColor];
+        label.font = [UIFont systemFontOfSize:11];
+        label.textAlignment = NSTextAlignmentCenter;
+        [dot addSubview:label];
+    }
+}
+
+- (void)addAnimationForDot:(UIView *)dot
+{
+    DotDirection direction = dot.tag;
+    CGFloat dotWidth = 30;
+    CGFloat dotGap = 10;
+    CGFloat leftGap = (self.view.frame.size.width - dotWidth * 2 - dotGap) / 2;
+    CGFloat path = dotWidth * 2 + dotGap;
+    CGFloat fromValue = direction == DotDirectionLeft ? leftGap : path;
+    CGFloat toValue = direction == DotDirectionLeft ? path : leftGap;
+    
+    CABasicAnimation *basicAnimation = [CABasicAnimation animationWithKeyPath:@"position.x"];
+    basicAnimation.fromValue = @(fromValue);
+    basicAnimation.toValue = @(toValue);
+    basicAnimation.duration = 1.f;
+    basicAnimation.repeatCount = MAXFLOAT;
+//    [dot.layer addAnimation:basicAnimation forKey:@"position.x"];
+    
+    CAKeyframeAnimation *keyFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.x"];
+    keyFrameAnimation.values = @[@(fromValue), @(toValue), @(fromValue)];
+    keyFrameAnimation.duration = 1.5f;
+    keyFrameAnimation.repeatCount = MAXFLOAT;
+    keyFrameAnimation.delegate = self;
+//    [dot.layer addAnimation:keyFrameAnimation forKey:@"position.x"];
+}
 
 - (void)testForLottie
 {
-    self.animationView = [LOTAnimationView animationNamed:@"jiazaidonghua1"];
+    self.animationView = [LOTAnimationView animationNamed:@"lottie_float_audio"];
     self.animationView.frame = CGRectMake(100, 100, 306, 108);
     self.animationView.contentMode = UIViewContentModeScaleAspectFit;
     self.animationView.loopAnimation = YES;
@@ -98,9 +200,60 @@ static CGFloat sectorWidth = 200;
     [self.view addSubview:self.animationView];
 }
 
+- (void)testForMask
+{
+    CGFloat topGap = 200;
+    CGFloat leftGap = 30;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width - leftGap * 2;
+    UIImage *image = [UIImage imageNamed:@"cover"];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(leftGap, topGap, width, width)];
+    imageView.image = image;
+    [self.view addSubview:imageView];
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:imageView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(width / 2, width / 2)];
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.frame = imageView.bounds;
+    layer.path = path.CGPath;
+    
+    imageView.layer.mask = layer;
+}
+
 - (void)testForDotLoadingView
 {
+    NSInteger numberOfLayer = 4;
+    CGFloat layerLeftGap = 10;
+    CGFloat layerTopGap = 10;
+
+    CGFloat height = 20;
+    CGFloat width = height * numberOfLayer + layerLeftGap * (numberOfLayer + 1);
+    CGFloat leftGap = ([UIScreen mainScreen].bounds.size.width - width) / 2;
     
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(leftGap, 200, width, height + 2 * layerTopGap)];
+    bgView.backgroundColor = [UIColor flatGrayColor];
+    [self.view addSubview:bgView];
+    
+    CGFloat layerWidth = bgView.frame.size.height - 2 * layerTopGap;
+    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(layerLeftGap, layerTopGap, layerWidth, layerWidth)];
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.path = path.CGPath;
+    layer.frame = CGRectMake(0, 0, layerWidth, layerWidth);
+    layer.fillColor = [UIColor flatPlumColor].CGColor;
+//    [bgView.layer addSublayer:layer];
+    
+    CAReplicatorLayer *repLayer = [CAReplicatorLayer layer];
+    [repLayer addSublayer:layer];
+    repLayer.frame = bgView.bounds;
+    repLayer.instanceCount = numberOfLayer;
+//    repLayer.instanceTransform = CATransform3DMakeScale(0.6, 0.6, 0.6);
+    repLayer.instanceTransform = CATransform3DMakeTranslation(10 + layerWidth, 0, 0);
+
+    CAKeyframeAnimation *scaleAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.values = @[@(1), @(0.5), @(1)];
+    scaleAnimation.duration = 1.5;
+    scaleAnimation.repeatCount = CGFLOAT_MAX;
+    [layer addAnimation:scaleAnimation forKey:@"transform.scale"];
+    
+    [bgView.layer addSublayer:repLayer];
 }
 
 - (void)testForLoadingView
@@ -183,6 +336,35 @@ static CGFloat sectorWidth = 200;
 
 - (void)testForPathAnimation
 {
+#if 1
+    CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    //在动画设置一些变量
+    pathAnimation.calculationMode = kCAAnimationPaced;
+    //我们希望动画持续
+    //如果我们动画从左到右的东西——我们想要呆在新位置,
+    //然后我们需要这些参数
+    pathAnimation.fillMode = kCAFillModeForwards;
+    pathAnimation.removedOnCompletion = NO;
+    pathAnimation.duration = 10;//完成动画的时间
+    //让循环连续演示
+    pathAnimation.repeatCount = MAXFLOAT;
+    //设置的路径动画
+    CGMutablePathRef curvedPath = CGPathCreateMutable();
+    CGPathMoveToPoint(curvedPath, NULL, 10, 10);//起始位置
+    CGPathAddQuadCurveToPoint(curvedPath, NULL, 10, 450, 310, 450);
+    CGPathAddQuadCurveToPoint(curvedPath, NULL, 310, 10, 10, 10);
+    //现在我们的路径,我们告诉动画我们想使用这条路径,那么我们发布的路径
+    pathAnimation.path = curvedPath;
+    CGPathRelease(curvedPath);
+    
+    UIImageView *circleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"coin"]];
+    circleView.frame = CGRectMake(100, 100, 40, 40);
+    [self.view addSubview:circleView];
+    //添加动画circleView——一旦你添加动画层,动画开始
+    [circleView.layer addAnimation:pathAnimation
+                            forKey:@"moveTheSquare"];
+#else
+    
     UIView *circleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     circleView.backgroundColor = [UIColor flatOrangeColor];
     circleView.layer.cornerRadius = 100 / 2;
@@ -197,6 +379,7 @@ static CGFloat sectorWidth = 200;
     keyAnimation.removedOnCompletion = NO;
     
     [circleView.layer addAnimation:keyAnimation forKey:@"position"];
+#endif
 }
 
 - (void)testForLayerScaleAnimation
