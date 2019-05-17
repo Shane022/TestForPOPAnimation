@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, DotDirection)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupSubviews];
+//    [self setupSubviews];
     
     // test
 //    [self testForScale];
@@ -83,7 +83,9 @@ typedef NS_ENUM(NSInteger, DotDirection)
     
 //    [self testForTwoDotAnimation];
     
-    [self testForLoadingAnimation];
+//    [self testForLoadingAnimation];
+    
+    [self testForLockScreen];
 }
 
 #pragma mark -
@@ -107,6 +109,47 @@ typedef NS_ENUM(NSInteger, DotDirection)
 }
 
 #pragma mark - Test Demo
+
+- (void)testForLockScreen
+{
+    CGFloat width = 250;
+    CGFloat height = 60;
+    CGFloat leftGap = ([UIScreen mainScreen].bounds.size.width - width) / 2;
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(leftGap, 200, width, height)];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"滑动来解锁>>";
+//    label.text = @"scroll to unlock >>";
+    label.font = [UIFont boldSystemFontOfSize:26];
+    label.textColor = [UIColor flatGrayColorDark];
+    label.backgroundColor = [UIColor flatBlackColor];
+    [self.view addSubview:label];
+
+    [label layoutIfNeeded];
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    CGFloat sliderTopGap = 0;
+    CGFloat sliderWidth = 40;
+    CGFloat sliderHeight = sliderTopGap == 0 ? height : (height - sliderTopGap) / 2;
+    UIView *sliderView = [[UIView alloc] initWithFrame:CGRectMake(0, sliderTopGap, sliderWidth, sliderHeight)];
+    sliderView.backgroundColor = [UIColor clearColor];
+    [label addSubview:sliderView];
+    
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = sliderView.bounds;
+    gradientLayer.colors = @[(__bridge id)[UIColor colorWithWhite:1 alpha:0.1].CGColor,
+                             (__bridge id)[UIColor colorWithWhite:1 alpha:0.3].CGColor,
+                             (__bridge id)[UIColor colorWithWhite:1 alpha:0.1].CGColor];
+    gradientLayer.locations = @[@(0), @(0.5), @(1)];
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(1, 0);
+    [sliderView.layer addSublayer:gradientLayer];
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position.x"];
+    animation.fromValue = @(0);
+    animation.toValue = @(label.frame.size.width - sliderWidth / 2);
+    animation.repeatCount = MAXFLOAT;
+    animation.duration = 2.f;
+    [gradientLayer addAnimation:animation forKey:@"position.x"];
+}
 
 - (void)testForLoadingAnimation
 {

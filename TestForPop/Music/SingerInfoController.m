@@ -10,12 +10,21 @@
 #import <UIView+YYAdd.h>
 #import "Chameleon.h"
 
+#import "CountDownUtil.h"
+
 typedef NS_ENUM(NSInteger, Direction) {
     DotViewDirectionLeft = 1,
     DotViewDirectionRight = -1
 };
 
 @interface SingerInfoController ()
+
+@property (nonatomic, strong) CountDownUtil *countdownUtil;
+
+@property (nonatomic, strong) UILabel *hourLabel;
+@property (nonatomic, strong) UILabel *minuteLabel;
+@property (nonatomic, strong) UILabel *secondLabel;
+
 @end
 
 @implementation SingerInfoController
@@ -32,7 +41,9 @@ typedef NS_ENUM(NSInteger, Direction) {
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self testForCADisplayLink];
+//    [self testForCADisplayLink];
+    
+    [self testForCountDown];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -40,6 +51,58 @@ typedef NS_ENUM(NSInteger, Direction) {
     [super viewWillDisappear:animated];
     
     [self stopLink];
+}
+
+#pragma mark - Test for count down
+- (void)testForCountDown
+{
+    [self setupCountdownView];
+    
+    NSString *start = @"2019-5-17 14:06:00";
+    NSString *end = @"2019-5-17 14:07:00";
+    
+    __weak typeof(self) weakSelf = self;
+    self.countdownUtil = [[CountDownUtil alloc] init];
+    [self.countdownUtil countDownWithStartDate:start endDate:end completed:^(NSInteger day, NSInteger hour, NSInteger minute, NSInteger second) {
+        [weakSelf refreshCountdownViewWithHour:hour minute:minute second:second];
+    }];
+}
+
+- (void)setupCountdownView
+{
+    NSInteger number = 3;
+    CGFloat viewWidth = 40;
+    CGFloat viewHeight = 120;
+    CGFloat viewGap = 10;
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    CGFloat leftGap = (screenSize.width - viewWidth * number - viewGap * (number - 1)) / 2;
+    CGFloat topGap = 200;
+    
+    for (NSInteger i = 0; i < number; i++) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(leftGap + (viewGap + viewWidth) * i, topGap, viewWidth, viewHeight)];
+        label.text = @"00";
+        label.textAlignment = NSTextAlignmentCenter;
+        label.backgroundColor = [UIColor flatBlackColor];
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont boldSystemFontOfSize:16];
+        
+        if (i == 0) {
+            self.hourLabel = label;
+        } else if (i == 1) {
+            self.minuteLabel = label;
+        } else if (i == 2) {
+            self.secondLabel = label;
+        }
+        
+        [self.view addSubview:label];
+    }
+}
+
+- (void)refreshCountdownViewWithHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second
+{
+    self.hourLabel.text = [NSString stringWithFormat:@"%02ld", hour];
+    self.minuteLabel.text = [NSString stringWithFormat:@"%02ld", minute];
+    self.secondLabel.text = [NSString stringWithFormat:@"%02ld", second];
 }
 
 #pragma mark - Test for CADisplayLink

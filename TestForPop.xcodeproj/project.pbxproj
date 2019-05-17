@@ -20,8 +20,9 @@
 		3482966922817FE600160921 /* lottie_float_audio.json in Resources */ = {isa = PBXBuildFile; fileRef = 3482966822817FE600160921 /* lottie_float_audio.json */; };
 		34AE0DE4227836F9001BCA4C /* UIBezierPath+TextPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AE0DE3227836F9001BCA4C /* UIBezierPath+TextPath.m */; };
 		34AE0DE72278372E001BCA4C /* NSString+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AE0DE62278372E001BCA4C /* NSString+Animation.m */; };
-		34DB04A62276FF8500E04BD6 /* SingerInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DB04A52276FF8500E04BD6 /* SingerInfoController.m */; };
+		34CFED6A228E7FE200003222 /* CountDownUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CFED69228E7FE200003222 /* CountDownUtil.m */; };
 		34DB04A922770C9500E04BD6 /* SingerInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DB04A822770C9500E04BD6 /* SingerInfoHeaderView.m */; };
+		34E23CC9228D5D5E00616215 /* SingerInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E23CC8228D5D5E00616215 /* SingerInfoController.m */; };
 		34F0D9822270280000FF6673 /* ColorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F0D9812270280000FF6673 /* ColorController.m */; };
 		34FFF9A322520FBF00BE1441 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FFF9A222520FBF00BE1441 /* AppDelegate.m */; };
 		34FFF9A622520FBF00BE1441 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FFF9A522520FBF00BE1441 /* ViewController.m */; };
@@ -75,10 +76,12 @@
 		34AE0DE3227836F9001BCA4C /* UIBezierPath+TextPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+TextPath.m"; sourceTree = "<group>"; };
 		34AE0DE52278372E001BCA4C /* NSString+Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Animation.h"; sourceTree = "<group>"; };
 		34AE0DE62278372E001BCA4C /* NSString+Animation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Animation.m"; sourceTree = "<group>"; };
-		34DB04A42276FF8500E04BD6 /* SingerInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingerInfoController.h; sourceTree = "<group>"; };
-		34DB04A52276FF8500E04BD6 /* SingerInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingerInfoController.m; sourceTree = "<group>"; };
+		34CFED68228E7FE200003222 /* CountDownUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountDownUtil.h; sourceTree = "<group>"; };
+		34CFED69228E7FE200003222 /* CountDownUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountDownUtil.m; sourceTree = "<group>"; };
 		34DB04A722770C9500E04BD6 /* SingerInfoHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingerInfoHeaderView.h; sourceTree = "<group>"; };
 		34DB04A822770C9500E04BD6 /* SingerInfoHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingerInfoHeaderView.m; sourceTree = "<group>"; };
+		34E23CC7228D5D5E00616215 /* SingerInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingerInfoController.h; sourceTree = "<group>"; };
+		34E23CC8228D5D5E00616215 /* SingerInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingerInfoController.m; sourceTree = "<group>"; };
 		34F0D9802270280000FF6673 /* ColorController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorController.h; sourceTree = "<group>"; };
 		34F0D9812270280000FF6673 /* ColorController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorController.m; sourceTree = "<group>"; };
 		34FFF99E22520FBF00BE1441 /* TestForPop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestForPop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +142,8 @@
 		34214C9322717D7A0048F8F4 /* Music */ = {
 			isa = PBXGroup;
 			children = (
+				34E23CC7228D5D5E00616215 /* SingerInfoController.h */,
+				34E23CC8228D5D5E00616215 /* SingerInfoController.m */,
 				340A7CAB2271883B0053BCA0 /* MusicView.h */,
 				340A7CAC2271883B0053BCA0 /* MusicView.m */,
 				340A7CB4227188740053BCA0 /* MusicView.xib */,
@@ -146,8 +151,6 @@
 				340A7CAF2271884A0053BCA0 /* MusicInfoView.m */,
 				340A7CB1227188660053BCA0 /* MusicLyricView.h */,
 				340A7CB2227188660053BCA0 /* MusicLyricView.m */,
-				34DB04A42276FF8500E04BD6 /* SingerInfoController.h */,
-				34DB04A52276FF8500E04BD6 /* SingerInfoController.m */,
 				34DB04A722770C9500E04BD6 /* SingerInfoHeaderView.h */,
 				34DB04A822770C9500E04BD6 /* SingerInfoHeaderView.m */,
 			);
@@ -176,6 +179,15 @@
 			path = TextPath;
 			sourceTree = "<group>";
 		};
+		34CFED67228E7FCA00003222 /* CountDown */ = {
+			isa = PBXGroup;
+			children = (
+				34CFED68228E7FE200003222 /* CountDownUtil.h */,
+				34CFED69228E7FE200003222 /* CountDownUtil.m */,
+			);
+			path = CountDown;
+			sourceTree = "<group>";
+		};
 		34FFF99522520FBF00BE1441 = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +213,7 @@
 		34FFF9A022520FBF00BE1441 /* TestForPop */ = {
 			isa = PBXGroup;
 			children = (
+				34CFED67228E7FCA00003222 /* CountDown */,
 				342DF6CC2281333000CC93DB /* Resource */,
 				340482B8227EAFDD0089A5BE /* Loading */,
 				34AE0DE1227836DB001BCA4C /* TextPath */,
@@ -448,14 +461,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				340A7CB02271884A0053BCA0 /* MusicInfoView.m in Sources */,
-				34DB04A62276FF8500E04BD6 /* SingerInfoController.m in Sources */,
 				34FFF9A622520FBF00BE1441 /* ViewController.m in Sources */,
 				34FFF9D52252FC7600BE1441 /* ClockFace.m in Sources */,
 				340A7CB3227188660053BCA0 /* MusicLyricView.m in Sources */,
 				34AE0DE72278372E001BCA4C /* NSString+Animation.m in Sources */,
 				340A7CAD2271883B0053BCA0 /* MusicView.m in Sources */,
 				3401D801226EF688006EB588 /* MusicViewController.m in Sources */,
+				34E23CC9228D5D5E00616215 /* SingerInfoController.m in Sources */,
 				34710E492269DC7100FE20D8 /* TwoSidesView.m in Sources */,
+				34CFED6A228E7FE200003222 /* CountDownUtil.m in Sources */,
 				34DB04A922770C9500E04BD6 /* SingerInfoHeaderView.m in Sources */,
 				34FFF9B122520FC100BE1441 /* main.m in Sources */,
 				34FFF9A322520FBF00BE1441 /* AppDelegate.m in Sources */,
